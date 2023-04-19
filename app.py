@@ -38,7 +38,7 @@ def app():
         preprocessed_image = test_transform(image)
         preprocessed_image = torch.unsqueeze(preprocessed_image, 0)
         # Make a prediction using the model
-        preprocessed_image = preprocessed_image.cuda()
+        preprocessed_image = preprocessed_image.to(device)
         LABELS = ['commercial_air_normal', 'commercial_air_over', 'commercial_deep_normal', 'commercial_deep_over', 'commercial_unbaked', 'inhouse_air_normal', 'inhouse_air_over',
                   'inhouse_deep_normal', 'inhouse_deep_over', 'inhouse_old_air_normal', 'inhouse_old_air_over', 'inhouse_old_deep_normal', 'inhouse_old_deep_over', 'inhouse_unbaked']
 
