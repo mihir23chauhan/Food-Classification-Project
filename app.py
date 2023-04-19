@@ -4,7 +4,13 @@ import torchvision.transforms as transforms
 from PIL import Image
 
 # Load the pre-trained PyTorch model
-model = torch.load('resnet50_experiment.pt')
+if torch.cuda.is_available():
+    device = torch.device('cuda')  # Use GPU
+
+else:
+    device = torch.device('cpu')   # Use CPU
+
+model = torch.load('resnet50_experiment.pt', map_location=device)
 
 test_transform = transforms.Compose([
     transforms.Resize((224, 224)),
@@ -12,11 +18,7 @@ test_transform = transforms.Compose([
     #         torchvision.transforms.Normalize(mean=(0.485, 0.456, 0.406), std=(0.229, 0.224, 0.225))
 ])
 
-if torch.cuda.is_available():
-    device = torch.device('cuda')  # Use GPU
 
-else:
-    device = torch.device('cpu')   # Use CPU
 # print(device)
 
 
