@@ -1,5 +1,6 @@
 import streamlit as st
 import torch
+import pandas as pd
 import torchvision.transforms as transforms
 from PIL import Image
 
@@ -41,8 +42,8 @@ def app():
         preprocessed_image = torch.unsqueeze(preprocessed_image, 0)
         # Make a prediction using the model
         preprocessed_image = preprocessed_image.to(device)
-        LABELS = ['commercial_air_normal', 'commercial_air_over', 'commercial_deep_normal', 'commercial_deep_over', 'commercial_unbaked', 'inhouse_air_normal', 'inhouse_air_over',
-                  'inhouse_deep_normal', 'inhouse_deep_over', 'inhouse_old_air_normal', 'inhouse_old_air_over', 'inhouse_old_deep_normal', 'inhouse_old_deep_over', 'inhouse_unbaked']
+        LABELS = [('Commercial', 'Fresh', 'Air Fry', 'Normal'), ('Commercial', 'Fresh', 'Air Fry', 'Over'), ('Commercial', 'Fresh', 'Deep Fry', 'Normal'), ('Commercial', 'Fresh', 'Deep Fry', 'Over'), ('Commercial', 'Fresh', 'NA', 'Unbaked'), ('Inhouse', 'Fresh', 'Air Fry', 'Normal'), ('Inhouse', 'Fresh', 'Air Fry', 'Over'),
+                  ('Inhouse', 'Fresh', 'Deep Fry', 'Normal'), ('Inhouse', 'Fresh', 'Deep Fry', 'Over'), ('Inhouse', 'Old', 'Air Fry', 'Normal'), ('Inhouse', 'Old', 'Air Fry', 'Over'), ('Inhouse', 'Old', 'Deep Fry', 'Normal'), ('Inhouse', 'Old', 'Deep Fry', 'Over'), ('Inhouse', 'Fresh', 'NA', 'Unbaked')]
 
         prediction = model(preprocessed_image)
         # Get the index of the predicted class
@@ -53,8 +54,16 @@ def app():
         predicted_label = LABELS[predicted_class_index]
 
         # Display the image and the predicted class
+
+        col1, col2, col3, col4 = st.columns(4)
+        col1.metric('Product:', predicted_label[0], label_visibility="visible")
+        col2.metric(
+            'Fresh/Old:', predicted_label[1], label_visibility="visible")
+        col3.metric(
+            'Cooking Proccess:', predicted_label[2], label_visibility="visible")
+        col4.metric('Level: ', predicted_label[3], label_visibility="visible")
+
         st.image(image, caption='Uploaded Image', use_column_width=True)
-        st.write('Prediction: ', predicted_label)
 
 
 # Run the app
