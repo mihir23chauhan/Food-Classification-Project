@@ -25,7 +25,7 @@ test_transform = transforms.Compose([
 
 def app():
     # Set the title of the app
-    st.title("Image Classification")
+    st.title("Image Analysis of Plant Based Meat Products")
 
     # Add a file uploader to get an image from the user
     uploaded_file = st.file_uploader(
