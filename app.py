@@ -25,6 +25,9 @@ test_transform = transforms.Compose([
 
 def app():
     # Set the title of the app
+    #st.set_page_config(page_title="My Streamlit App")
+    st.set_page_config(page_title="Image Analysis", page_icon=None, layout="centered",
+                       initial_sidebar_state="auto")
     st.title("Image Analysis of Plant Based Meat Products")
 
     # Add a file uploader to get an image from the user
