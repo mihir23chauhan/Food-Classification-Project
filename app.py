@@ -11,7 +11,7 @@ if torch.cuda.is_available():
 else:
     device = torch.device('cpu')   # Use CPU
 
-model = torch.load('resnet50_experiment.pt', map_location=device)
+model = torch.load('models/resnet50_experiment.pt', map_location=device)
 
 test_transform = transforms.Compose([
     transforms.Resize((224, 224)),
