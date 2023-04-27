@@ -21,7 +21,3 @@ streamlit run app.py
 ```
 
 All necessary dependencies are listed in `requirements.txt`.
-
-## Credits
-
-This project was created by Mihir Chauhan and Divyanshu Meena. We would like to acknowledge the Food101 dataset, which we used to pre-train our model. We also want to thank the PyTorch community for providing a powerful deep learning framework.
